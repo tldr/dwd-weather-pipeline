@@ -1,18 +1,18 @@
 import io
 import logging
-import shutil
 import zipfile
-from datetime import datetime
 from pathlib import Path
-from typing import List, Optional, Any
+from typing import List, Optional
 
 import pandas as pd
 import pandera as pa
 import requests
-from bs4 import BeautifulSoup, Tag
+from bs4 import BeautifulSoup
+from pandas import DataFrame
 from pandera import Column, DataFrameSchema
-from prefect import flow, task
 from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_exponential
+
+from prefect import flow, task
 
 # -------------------- Config --------------------
 DWD_BASE_URL = (
@@ -99,8 +99,8 @@ def download_and_extract_all(zip_links: list[str]) -> list[str]:
 
 # -------------------- Task: Parse and Concatenate --------------------
 @task
-def parse_weather_files(files: list[str]) -> pd.DataFrame:
-    dfs = []
+def parse_weather_files(files: list[str]) -> DataFrame:
+    dfs: list[DataFrame] = []
     for file_path in files:
         try:
             # Skip metadata files
@@ -108,26 +108,26 @@ def parse_weather_files(files: list[str]) -> pd.DataFrame:
                 continue
 
             # Only process produkt_klima_tag files
-            if not "produkt_klima_tag" in file_path:
+            if "produkt_klima_tag" not in file_path:
                 continue
 
             # Read the file with -999 as NA value
-            df = pd.read_csv(file_path, sep=";", na_values=["-999", -999], encoding="latin1")
+            df = pd.read_csv(file_path, sep=";", na_values=["-999"], encoding="latin1")
             if df.empty:
                 logger.warning(f"File {file_path} is empty. Skipping.")
                 continue
             if "STATIONS_ID" not in df.columns:
                 logger.warning(f"File {file_path} missing expected columns. Skipping.")
                 continue
-            # Convert station ID to integer
-            df["STATIONS_ID"] = pd.to_numeric(df["STATIONS_ID"], errors="coerce").astype(int)
+            # Convert station ID to string
+            df["STATIONS_ID"] = df["STATIONS_ID"].astype(str)
             dfs.append(df)
         except Exception as e:
             logger.error(f"Error parsing {file_path}: {e}")
     if not dfs:
         logger.error("No valid weather data files were parsed.")
-        return pd.DataFrame()
-    combined = pd.concat(dfs, ignore_index=True)
+        return pd.DataFrame(columns=["STATIONS_ID", "DATE"])
+    combined: DataFrame = pd.concat(dfs, ignore_index=True)
     logger.info(f"Combined dataset shape: {combined.shape}")
     return combined
 
@@ -274,12 +274,13 @@ def enrich_with_station_metadata(df_weather: pd.DataFrame, df_meta: pd.DataFrame
 
 # -------------------- Task: Save Output --------------------
 @task
-def save_to_parquet(df: pd.DataFrame, output_path: str):
+def save_to_parquet(df: pd.DataFrame, output_path: str) -> None:
+    """Save DataFrame to parquet format."""
     if df.empty:
-        logger.warning("Save skipped: empty dataframe.")
+        logger.warning("Skipping save: empty dataframe.")
         return
     df.to_parquet(output_path, index=False)
-    logger.info(f"Saved to {output_path}")
+    logger.info(f"Saved data to {output_path}")
 
 
 # -------------------- Flow --------------------

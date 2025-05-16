@@ -27,13 +27,8 @@
         "--config-file",
         "pyproject.toml"
     ],
-    "ruff.lint.args": [
-        "--config",
-        "pyproject.toml"
-    ],
-    "ruff.format.args": [
-        "--config",
-        "pyproject.toml"
+    "ruff.path": [
+        "${workspaceFolder}/.venv/bin/ruff"
     ],
     "python.analysis.typeCheckingMode": "basic",
     "python.linting.enabled": true,
