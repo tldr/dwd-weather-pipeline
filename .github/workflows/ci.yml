@@ -40,12 +40,7 @@ jobs:
     - name: Run isort and show diff
       run: |
         source .venv/bin/activate
-        echo "ISORT VERSION IN CI:"
-        isort --version
-        echo "--- CONTENT OF main.py BEFORE ISORT ---"
-        cat src/dwd_weather_pipeline/main.py
-        echo "--- END CONTENT OF main.py BEFORE ISORT ---"
-        echo "RUNNING ISORT WITH --DIFF on main.py:"
+        echo "RUNNING ISORT WITH --CHECK-ONLY on src/dwd_weather_pipeline/main.py:"
         isort --check-only --diff --settings-path pyproject.toml src/dwd_weather_pipeline/main.py
         echo "RUNNING ISORT WITH --CHECK-ONLY on src and tests (original broader check):"
         isort --check-only --settings-path pyproject.toml src tests
