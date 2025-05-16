@@ -6,20 +6,29 @@
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter",
         "editor.formatOnSave": true,
-        "editor.rulers": [100]
+        "editor.rulers": [
+            100
+        ]
     },
-    "python.formatting.provider": "black",
-    "python.formatting.blackArgs": ["--line-length", "100"],
-    "isort.args": ["--profile", "black", "--line-length", "100"],
+    "black-formatter.args": [
+        "--config",
+        "pyproject.toml"
+    ],
+    "isort.args": [
+        "--settings-path",
+        "pyproject.toml"
+    ],
     "mypy-type-checker.args": [
-        "--warn-return-any",
-        "--warn-unused-configs",
-        "--disallow-untyped-defs",
-        "--check-untyped-defs"
+        "--config-file",
+        "pyproject.toml"
+    ],
+    "ruff.lint.args": [
+        "--config",
+        "pyproject.toml"
     ],
     "python.analysis.typeCheckingMode": "basic",
     "python.linting.enabled": true,
     "python.linting.mypyEnabled": true,
     "python.linting.mypyPath": "${workspaceFolder}/.venv/bin/mypy",
     "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python"
-} 
+}
