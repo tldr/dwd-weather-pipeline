@@ -1,0 +1,7 @@
+Stations_ID;Stationsname;Geo. Laenge [Grad];Geo. Breite [Grad];Stationshoehe [m];Geberhoehe ueber Grund [m];Von_Datum;Bis_Datum;Geraetetyp Name;Messverfahren;eor;
+44;Ahlhorn;8.23;52.88;46;2;19710301;19711130;Hygrograph nach Frankenberg;Feuchteregistrierung, konv.;eor;
+44;Ahlhorn;8.23;52.88;46;2;19711201;19930630;Thermohygrograph;Temperatur- und Feuchtereg., konv.;eor;
+44;Groﬂenkneten-Ahlhorn;8.22;52.92;42;2;19930701;20070331;Thermohygrograph;Temperatur- und Feuchtereg., konv.;eor;
+44;Groﬂenkneten;8.24;52.93;44;2;20070401;20190820;Feuchtesonde HMP45D;Feuchtemessung, elektr.;eor;
+44;Groﬂenkneten;8.24;52.93;44;2;20190821;20250514;EE33;Feuchtemessung, elektr.;eor;
+generiert: 15.05.2025 --  Deutscher Wetterdienst  --

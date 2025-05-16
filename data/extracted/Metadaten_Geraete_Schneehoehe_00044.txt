@@ -1,0 +1,5 @@
+Stations_ID;Stationsname;Geo. Laenge [Grad];Geo. Breite [Grad];Stationshoehe [m];Geberhoehe ueber Grund [m];Von_Datum;Bis_Datum;Geraetetyp Name;Messverfahren;eor;
+44;Ahlhorn;8.23;52.88;46;;19710301;19930630;Schneepegel;Schneehöhenmessung, manuell;eor;
+44;Großenkneten-Ahlhorn;8.22;52.92;42;;19930701;20070331;Schneepegel;Schneehöhenmessung, manuell;eor;
+44;Großenkneten;8.24;52.93;44;;20070401;20250514;Schneepegel;Schneehöhenmessung, manuell;eor;
+generiert: 15.05.2025 --  Deutscher Wetterdienst  --

@@ -1,0 +1,13 @@
+Stations_ID;Stations_Name;Parameter;Von_Datum;Bis_Datum;Anzahl_Fehlwerte;Beschreibung;eor;                                                                                                              
+44;Groﬂenkneten;UPM;04.05.2024;04.05.2024;1;;eor;                                                                                                                                                       
+44;Groﬂenkneten;UPM;15.06.2024;15.06.2024;1;;eor;                                                                                                                                                       
+44;Groﬂenkneten;UPM;22.09.2024;27.09.2024;6;;eor;                                                                                                                                                       
+44;Groﬂenkneten;UPM;20.04.2025;22.04.2025;3;;eor;                                                                                                                                                       
+44;Groﬂenkneten;VPM;04.05.2024;04.05.2024;1;;eor;                                                                                                                                                       
+44;Groﬂenkneten;VPM;15.06.2024;15.06.2024;1;;eor;                                                                                                                                                       
+44;Groﬂenkneten;VPM;22.09.2024;27.09.2024;6;;eor;                                                                                                                                                       
+44;Groﬂenkneten;VPM;20.04.2025;22.04.2025;3;;eor;                                                                                                                                                       
+44;Groﬂenkneten;RSK;26.09.2024;26.09.2024;1;;eor;                                                                                                                                                       
+44;Groﬂenkneten;RSKF;26.09.2024;26.09.2024;1;;eor;                                                                                                                                                      
+44;Groﬂenkneten;SHK_TAG;01.05.2024;30.09.2024;153;Automat: Sensor von Mai bis September nicht in Betrieb;eor;                                                                                           
+generiert: 15.05.2025 --  Deutscher Wetterdienst  --                                                                                                                                                    
