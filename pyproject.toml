@@ -28,6 +28,7 @@ dev = [
     "pandas-stubs",
     "types-requests",
     "types-beautifulsoup4",
+    "pre-commit>=3.5.0",
 ]
 
 [build-system]
