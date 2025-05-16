@@ -1,3 +1,7 @@
+# Custom
+data/*
+!data/.gitkeep
+
 # Python
 __pycache__/
 *.py[cod]
