@@ -16,6 +16,12 @@ echo "3/4 Running ruff..."
 ruff check src/
 
 echo "4/4 Running mypy..."
-mypy --config-file=pyproject.toml src/
+echo "Starting dmypy server..."
+dmypy start
+echo "Running mypy checks..."
+dmypy run src/
+
+echo "Stopping dmypy server..."
+dmypy stop
 
 echo "All checks completed!"
