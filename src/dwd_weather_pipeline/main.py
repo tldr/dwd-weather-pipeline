@@ -4,12 +4,12 @@ import shutil
 import zipfile
 from datetime import datetime
 from pathlib import Path
-from typing import List, Optional
+from typing import List, Optional, Any
 
 import pandas as pd
 import pandera as pa
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 from pandera import Column, DataFrameSchema
 from prefect import flow, task
 from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_exponential
@@ -45,12 +45,12 @@ def download_file(url: str) -> bytes:
 
 # -------------------- Task: Scrape ZIP Files --------------------
 @task
-def list_zip_files(station_ids: Optional[List[int]] = None) -> list[str]:
+def list_zip_files(station_ids: Optional[List[int]] = None) -> List[str]:
     logger.info("Listing zip files from DWD...")
     resp = requests.get(DWD_BASE_URL, timeout=10)
     soup = BeautifulSoup(resp.text, "html.parser")
-    links = [a["href"] for a in soup.find_all("a", href=True)]
-    zip_links = [link for link in links if link.endswith(".zip") and "tageswerte_KL_" in link]
+    links = [a.get("href", "") for a in soup.find_all("a", href=True)]
+    zip_links = [link for link in links if isinstance(link, str) and link.endswith(".zip") and "tageswerte_KL_" in link]
     if station_ids:
         filtered_links = [
             z for z in zip_links if any(f"_{station_id:05d}_" in z for station_id in station_ids)
@@ -280,7 +280,7 @@ def save_to_parquet(df: pd.DataFrame, output_path: str):
 
 # -------------------- Flow --------------------
 @flow(name="DWD Weather Pipeline - Full ZIP Import")
-def dwd_weather_pipeline(output_path: str, station_ids: Optional[List[int]] = None):
+def dwd_weather_pipeline(output_path: str, station_ids: Optional[List[int]] = None) -> None:
     zip_links = list_zip_files(station_ids)
     if not zip_links:
         logger.error("No ZIP files found to process. Pipeline terminating.")
