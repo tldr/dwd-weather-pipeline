@@ -16,6 +16,6 @@ echo "3/4 Running ruff..."
 ruff check src/
 
 echo "4/4 Running mypy..."
-dmypy run src/
+mypy --config-file=pyproject.toml src/
 
 echo "All checks completed!"

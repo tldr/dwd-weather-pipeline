@@ -8,7 +8,6 @@ import pandas as pd
 import pandera as pa
 import requests
 from bs4 import BeautifulSoup
-from pandas import DataFrame
 from pandera import Column, DataFrameSchema
 from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_exponential
 
@@ -99,8 +98,8 @@ def download_and_extract_all(zip_links: list[str]) -> list[str]:
 
 # -------------------- Task: Parse and Concatenate --------------------
 @task
-def parse_weather_files(files: list[str]) -> DataFrame:
-    dfs: list[DataFrame] = []
+def parse_weather_files(files: list[str]) -> pd.DataFrame:
+    dfs: list[pd.DataFrame] = []
     for file_path in files:
         try:
             # Skip metadata files
@@ -127,7 +126,7 @@ def parse_weather_files(files: list[str]) -> DataFrame:
     if not dfs:
         logger.error("No valid weather data files were parsed.")
         return pd.DataFrame(columns=["STATIONS_ID", "DATE"])
-    combined: DataFrame = pd.concat(dfs, ignore_index=True)
+    combined = pd.concat(dfs, ignore_index=True)
     logger.info(f"Combined dataset shape: {combined.shape}")
     return combined
 
@@ -164,7 +163,7 @@ def validate_weather_data(df: pd.DataFrame) -> pd.DataFrame:
         coerce=True,
         strict=False,
     )
-    return schema.validate(df)
+    return schema.validate(df)  # type: ignore[no-any-return]
 
 
 # -------------------- Task: Transform --------------------
