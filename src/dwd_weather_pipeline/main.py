@@ -9,9 +9,8 @@ import pandera as pa
 import requests
 from bs4 import BeautifulSoup
 from pandera import Column, DataFrameSchema
-from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_exponential
-
 from prefect import flow, task
+from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_exponential
 
 # -------------------- Config --------------------
 DWD_BASE_URL = (
