@@ -1,6 +1,8 @@
 # Custom
 data/*
 !data/.gitkeep
+storage/*
+!storage/.gitkeep
 
 # Python
 __pycache__/
