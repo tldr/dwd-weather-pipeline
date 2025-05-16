@@ -1,1 +1,1 @@
-"""Test suite for the DWD Weather Pipeline.""" 
+"""Test suite for the DWD Weather Pipeline."""
