@@ -13,15 +13,16 @@
         "editor.codeActionsOnSave": {
             "source.organizeImports": "explicit",
             "source.fixAll": "explicit"
-        }
+        },
+        "python.formatting.provider": "none"
     },
     "black-formatter.args": [
         "--config",
-        "pyproject.toml"
+        "${workspaceFolder}/pyproject.toml"
     ],
     "isort.args": [
         "--settings-path",
-        "pyproject.toml"
+        "${workspaceFolder}/pyproject.toml"
     ],
     "mypy-type-checker.args": [
         "--config-file",
