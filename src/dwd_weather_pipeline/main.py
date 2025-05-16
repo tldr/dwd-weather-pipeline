@@ -50,7 +50,11 @@ def list_zip_files(station_ids: Optional[List[int]] = None) -> List[str]:
     resp = requests.get(DWD_BASE_URL, timeout=10)
     soup = BeautifulSoup(resp.text, "html.parser")
     links = [a.get("href", "") for a in soup.find_all("a", href=True)]
-    zip_links = [link for link in links if isinstance(link, str) and link.endswith(".zip") and "tageswerte_KL_" in link]
+    zip_links = [
+        link
+        for link in links
+        if isinstance(link, str) and link.endswith(".zip") and "tageswerte_KL_" in link
+    ]
     if station_ids:
         filtered_links = [
             z for z in zip_links if any(f"_{station_id:05d}_" in z for station_id in station_ids)
