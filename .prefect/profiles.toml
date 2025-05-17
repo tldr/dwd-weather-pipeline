@@ -1,0 +1,10 @@
+active = "local"
+
+[profiles.local]
+PREFECT_API_URL = "http://192.168.80.33:4200/api"
+PREFECT_SERVER_DATABASE_CONNECTION_URL = "postgresql+asyncpg://prefect:lansoabsndlasndoasd@localhost:5432/prefect"
+PREFECT_SERVER_API_HOST = "192.168.80.33"
+PREFECT_RESULTS_LOCAL_STORAGE_PATH = "/var/local/prefect/.prefect/prefect-storage"
+PREFECT_LOGGING_LEVEL = "ERROR"
+PREFECT_SERVER_ANALYTICS_ENABLED = "False"
+PREFECT_RESULTS_PERSIST_BY_DEFAULT = "true"
